@@ -4,13 +4,13 @@
   </header>
   <%= form_for @article do |f| %>
     <div class="form-group">
-      <%= f.label :name, 記事タイトル %>
-      <%= f.text_field :name %>
+      <%= f.label :title, "記事タイトル" %>
+      <%= f.text_field :title %>
     </div>
 
     <div class="form-group">
-      <%= f.label :body ,ブログ本文 %>
-      <%= f.text_field :body %>
+      <%= f.label :content, "ブログ本文" %>
+      <%= f.text_field :content %>
     </div>
 
     <%= f.submit "投稿する" %>
