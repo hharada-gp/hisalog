@@ -1,0 +1,9 @@
+<main class="container">
+  <header>
+    <h1><%= @article.title %></h1>
+  </header>
+  <div>
+    <%= @article.content %>
+  </div>
+  <%= link_to '記事一覧へ', articles_path, class: "btn btn-default" %>
+</main>
