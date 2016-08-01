@@ -1,17 +1,18 @@
 <main class="container">
   <header>
-    <h1>ブログを投稿する</h1>
+    <h1>記事を投稿する</h1>
   </header>
-  <form action="" method="post">
+  <%= form_for @article do |f| %>
     <div class="form-group">
-      <label for="article_title">ブログタイトル</label>
-      <input type="text" name="article_title" placeholder="ブログタイトル" class="form-control">
+      <%= f.label :name, 記事タイトル %>
+      <%= f.text_field :name %>
     </div>
 
     <div class="form-group">
-      <label for="article_body">ブログ本文</label>
-      <textarea name="article_body" cols="30" rows="10" placeholder="ブログ本文" class="form-control"></textarea>
+      <%= f.label :body ,ブログ本文 %>
+      <%= f.text_field :body %>
     </div>
-    <button type="submit" class="btn btn-default">投稿する</button>
-  </form>
+
+    <%= f.submit "投稿する" %>
+  <% end %> 
 </main>
