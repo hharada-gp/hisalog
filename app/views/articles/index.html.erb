@@ -8,6 +8,9 @@
     <h2><%= article.title %></h2>
     <small><%= article.created_at %></small>
     <p><%= article.content %></p>
+    <%= link_to "詳細", article, class: "btn btn-default btn-xs" %>
+    <%= link_to "編集", edit_article_path(article), class: "btn btn-default btn-xs" %>
+    <%= link_to "削除", article_path(article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
   </article>
   <% end %>
 </main>

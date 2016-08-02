@@ -1,8 +1,8 @@
 <main class="container">
   <header>
-    <h1>記事を投稿する</h1>
+    <h1>記事を編集する</h1>
   </header>
-  <%= form_for @article do |f| %>
+  <%= form_for :article, url: article_path, method: :patch do |f| %>
     <% if @article.errors.any? %>
       <div class="bg-danger">
         <p><%= @article.errors.count %>件のエラーのため保存できませんでした</p>
