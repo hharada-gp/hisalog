@@ -18,6 +18,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @allArticlesInTheCategory = @category.articles.all
   end
 
   def edit

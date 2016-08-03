@@ -1,6 +1,23 @@
 <main class="container">
   <header>
-    <h1><%= @category.name %></h1>
+    <h1><%= @category.name %>の記事一覧</h1>
   </header>
+  <% @allArticlesInTheCategory.each do |article| %>
+  <article>
+    <h2><%= article.title %></h2>
+    <dl class="dl-horizontal">
+      <dt>本文</dt>
+      <dd><%= article.content %></dd>
+      <dt>日付</dt>
+      <dd><%= article.created_at %></dd>
+      <dt>メニュー</dt>
+      <dd>
+        <%= link_to "詳細", article, class: "btn btn-default btn-xs" %>
+        <%= link_to "編集", edit_article_path(article), class: "btn btn-default btn-xs" %>
+        <%= link_to "削除", article_path(article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
+      </dd>
+    </dl>
+  </article>
+  <% end %>
   <%= link_to 'カテゴリ一覧へ', categories_path, class: "btn btn-default" %>
 </main>

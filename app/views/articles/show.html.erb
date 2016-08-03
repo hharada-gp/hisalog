@@ -2,8 +2,17 @@
   <header>
     <h1><%= @article.title %></h1>
   </header>
-  <div>
-    <%= @article.content %>
-  </div>
+  <dl class="dl-horizontal">
+    <dt>カテゴリ</dt>
+    <dd><%= link_to @article.category.name, @article.category %></dd>
+    <dt>本文</dt>
+    <dd><%= @article.content %></dd>
+    <dt>日付</dt>
+    <dd><%= @article.created_at %></dd>
+    <dt>メニュー</dt>
+    <dd>
+      <%= link_to "編集", edit_article_path(@article), class: "btn btn-default btn-xs" %>
+      <%= link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
+    </dd>
   <%= link_to '記事一覧へ', articles_path, class: "btn btn-default" %>
 </main>
