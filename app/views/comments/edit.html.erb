@@ -1,42 +1,35 @@
 <article class="container">
   <header>
-    <h1><%= @article.title %></h1>
+    <h1><%= @comment.article.title %></h1>
   </header>
   <div class="row">
-    <div class="col-lg-8"><%= @article.content %></div>
+    <div class="col-lg-8"><%= @comment.article.content %></div>
 
     <dl class="col-lg-4">
       <dt>カテゴリ</dt>
-      <dd><%= link_to @article.category.name, @article.category %></dd>
+      <dd><%= link_to @comment.article.category.name, @comment.article.category %></dd>
       <dt>日付</dt>
-      <dd><%= @article.created_at %></dd>
+      <dd><%= @comment.article.created_at %></dd>
       <dt>メニュー</dt>
       <dd>
-        <%= link_to "編集", edit_article_path(@article), class: "btn btn-default btn-xs" %>
-        <%= link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
+        <%= link_to "編集", edit_article_path(@comment.article), class: "btn btn-default btn-xs" %>
+        <%= link_to "削除", article_path(@comment.article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
       </dd>
     </dl>
   </div>
   <div id="comment" class="m-b-2">
     <h2>コメント</h2>
-    <% if @allComments.exists? %>
     <ul>
-    <% @allComments.each do |comment| %>
+    <% @comment.article.comments.all.each do |comment| %>
       <li>
         <dl>
           <dt><%= comment.name %> さんのコメント</dt>
           <dd><%= comment.content %></dd>
-          <dd>
-            <%= link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs" %>
-            <%= link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
-          </dd>
+          <dd><%= link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs" %></dd>
         </dl>
       </li>
     <% end %>
     </ul>
-    <% else %>
-    <p>まだコメントはありません。</p>
-    <% end %>
     <%= form_for @comment do |f| %>
     <% if @comment.errors.any? %>
       <div class="bg-danger">
@@ -48,7 +41,7 @@
         </ul>
       </div>
     <% end %>
-    <h3>コメントを書く</h3>
+    <h3>コメントを編集する</h3>
     <div class="form-group">
       <%= f.label :name, "名前" %>
       <%= f.text_field :name, class: "form-control" %>
@@ -59,7 +52,7 @@
       <%= f.text_area :content, class: "form-control" %>
     </div>
 
-    <%= f.submit "コメントを書く", class: "btn btn-primary" %>
+    <%= f.submit "コメントを編集する", class: "btn btn-primary" %>
     <%= f.hidden_field :article_id %>
     <% end %>
   </div>

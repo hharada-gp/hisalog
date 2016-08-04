@@ -18,6 +18,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comment = @article.comments.build()
+    @allComments = @article.comments.all
   end
 
   def edit
