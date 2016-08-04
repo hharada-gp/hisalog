@@ -25,7 +25,10 @@
         <dl>
           <dt><%= comment.name %> さんのコメント</dt>
           <dd><%= comment.content %></dd>
-          <dd><%= link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs" %></dd>
+          <dd>
+            <%= link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs" %>
+            <%= link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs" %>
+          </dd>
         </dl>
       </li>
     <% end %>
