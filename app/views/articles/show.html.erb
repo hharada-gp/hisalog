@@ -6,10 +6,12 @@
     <div class="col-lg-8"><%= @article.content %></div>
 
     <dl class="col-lg-4">
+      <% if @article.category.present? %>
       <dt>カテゴリ</dt>
       <dd><%= link_to @article.category.name, @article.category %></dd>
+      <% end %>
       <dt>日付</dt>
-      <dd><%= @article.created_at %></dd>
+      <dd><%= date @article.created_at %></dd>
       <dt>メニュー</dt>
       <dd>
         <%= link_to "編集", edit_article_path(@article), class: "btn btn-default btn-xs" %>

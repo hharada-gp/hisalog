@@ -3,4 +3,5 @@ class Article < ActiveRecord::Base
   has_many :comments
   validates :title, presence: true
   validates :content, presence: true
+  validates :category_id, presence: true
 end
