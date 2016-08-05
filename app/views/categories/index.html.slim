@@ -1,0 +1,19 @@
+main.container
+  header
+    h1
+      | カテゴリ一覧
+  - if @categories.exists?
+    = link_to "カテゴリを追加する", new_category_path, class: "btn btn-primary"
+    = link_to "記事一覧へ", articles_path, class: "btn btn-default"
+    ul
+      - @categories.each do |category|
+        li
+          = category.name
+          = link_to "このカテゴリの記事一覧", category, class: "btn btn-default btn-xs"
+          = link_to "編集", edit_category_path(category), class: "btn btn-default btn-xs"
+          = link_to "削除", category_path(category), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
+  - else
+    p
+      | まだカテゴリはありません。
+    = link_to "カテゴリを追加する", new_category_path, class: "btn btn-primary"
+    = link_to "記事一覧へ", articles_path, class: "btn btn-default"

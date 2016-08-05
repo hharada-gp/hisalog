@@ -1,0 +1,30 @@
+main.container
+  header
+    h1
+      | 記事一覧
+  = link_to "新しい記事を作成する", new_article_path, class: "btn btn-primary"
+  = link_to "新しいカテゴリを作成する", new_category_path, class: "btn btn-default"
+  - @articles.each do |article|
+    article
+      h2
+        = article.title
+      dl.dl-horizontal
+        - if article.category.present?
+          dt
+            | カテゴリ
+          dd
+            = link_to article.category.name, article.category
+        dt
+          | 本文
+        dd
+          = article.content
+        dt
+          | 日付
+        dd
+          = date article.created_at
+        dt
+          | メニュー
+        dd
+          = link_to "詳細", article, class: "btn btn-default btn-xs"
+          = link_to "編集", edit_article_path(article), class: "btn btn-default btn-xs"
+          = link_to "削除", article_path(article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"

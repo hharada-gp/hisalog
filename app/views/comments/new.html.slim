@@ -1,0 +1,56 @@
+article.container
+  header
+    h1
+      = @comment.article.title
+  .row
+    .col-lg-8
+      = @comment.article.content
+    dl.col-lg-4
+      dt
+        | カテゴリ
+      dd
+        = link_to @comment.article.category.name, @comment.article.category
+      dt
+        | 日付
+      dd
+        = @comment.article.created_at
+      dt
+        | メニュー
+      dd
+        = link_to "編集", edit_article_path(@comment.article), class: "btn btn-default btn-xs"
+        = link_to "削除", article_path(@comment.article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
+  #comment.m-b-2
+    h2
+      | コメント
+    ul
+      - @allComments.each do |comment|
+        li
+          dl
+            dt
+              = comment.name
+              |  さんのコメント
+            dd
+              = comment.content
+            dd
+              = link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs"
+    = form_for @comment do |f|
+      - if @comment.errors.any?
+        .bg-danger
+          p
+            = @comment.errors.count
+            | 件のエラーのため保存できませんでした
+          ul
+            - @comment.errors.full_messages.each do |msg|
+              li
+                = msg
+      h3
+        | コメントを書く
+      .form-group
+        = f.label :name, "名前"
+        = f.text_field :name, class: "form-control"
+      .form-group
+        = f.label :content, "コメント"
+        = f.text_area :content, class: "form-control"
+      = f.submit "コメントを書く", class: "btn btn-primary"
+      = f.hidden_field :article_id
+  = link_to '記事一覧へ', articles_path, class: "btn btn-default"

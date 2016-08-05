@@ -1,0 +1,25 @@
+main.container
+  header
+    h1
+      | 記事を編集する
+  = form_for :article, url: article_path, method: :patch do |f|
+    - if @article.errors.any?
+      .bg-danger
+        p
+          = @article.errors.count
+          | 件のエラーのため保存できませんでした
+        ul
+          - @article.errors.full_messages.each do |msg|
+            li
+              = msg
+    .form-group
+      = f.label :category_id, "記事カテゴリ"
+      = f.select :category_id, Category.all.map{ |c| [c.name, c.id]}
+    .form-group
+      = f.label :title, "記事タイトル"
+      = f.text_field :title, class: "form-control"
+    .form-group
+      = f.label :content, "ブログ本文"
+      = f.text_area :content, class: "form-control"
+    = f.submit "投稿する", class: "btn btn-primary"
+    = link_to "戻る", articles_path, class: "btn btn-default"
