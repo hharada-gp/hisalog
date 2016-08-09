@@ -1,0 +1,24 @@
+.l-{
+  &outer{
+    margin: auto;
+    width: $siteWidth;
+  }
+  &header{
+    margin: 144px 0 64px;
+    position: relative;
+  }
+  &block{
+    margin-bottom: 40px;
+  }
+  &row{
+    display: flex;
+    justify-content: space-between;
+  }
+  &grid{
+    @for $i from 1 to 12{
+      &--#{$i}{
+        width: 67px * $i + 20px * ($i - 1);
+      }
+    } 
+  }
+}

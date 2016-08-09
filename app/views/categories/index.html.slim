@@ -1,19 +1,21 @@
-main.container
-  header
-    h1
-      | カテゴリ一覧
+main.l-outer
+  header.l-header
+    h1.c-heading--first Categories
+    = link_to "カテゴリを追加する", new_category_path, class: "c-btn--primary"
   - if @categories.exists?
-    = link_to "カテゴリを追加する", new_category_path, class: "btn btn-primary"
-    = link_to "記事一覧へ", articles_path, class: "btn btn-default"
-    ul
-      - @categories.each do |category|
-        li
-          = category.name
-          = link_to "このカテゴリの記事一覧", category, class: "btn btn-default btn-xs"
-          = link_to "編集", edit_category_path(category), class: "btn btn-default btn-xs"
-          = link_to "削除", category_path(category), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
+    .l-block
+      ul.c-disclist
+        - @categories.each do |category|
+          li.c-disclist__item
+            = category.name
+            ul.c-inlinelist
+              li.c-inlinelist__item
+                = link_to "このカテゴリの記事一覧", category, class: "c-link--default"
+              li.c-inlinelist__item
+                = link_to "編集", edit_category_path(category), class: "c-link--default"
+              li.c-inlinelist__item
+                = link_to "削除", category_path(category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-link--danger"
   - else
-    p
-      | まだカテゴリはありません。
-    = link_to "カテゴリを追加する", new_category_path, class: "btn btn-primary"
-    = link_to "記事一覧へ", articles_path, class: "btn btn-default"
+    .l-block
+      p カテゴリはまだありません。
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"

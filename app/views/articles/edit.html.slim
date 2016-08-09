@@ -1,25 +1,28 @@
-main.container
-  header
-    h1
-      | 記事を編集する
+main.l-outer
+  header.l-header
+    h1.c-heading--first Edit the article
   = form_for :article, url: article_path, method: :patch do |f|
     - if @article.errors.any?
-      .bg-danger
+      .c-message--error
         p
           = @article.errors.count
           | 件のエラーのため保存できませんでした
-        ul
+        ul.c-disclist
           - @article.errors.full_messages.each do |msg|
-            li
-              = msg
-    .form-group
-      = f.label :category_id, "記事カテゴリ"
-      = f.select :category_id, Category.all.map{ |c| [c.name, c.id]}
-    .form-group
-      = f.label :title, "記事タイトル"
-      = f.text_field :title, class: "form-control"
-    .form-group
-      = f.label :content, "ブログ本文"
-      = f.text_area :content, class: "form-control"
-    = f.submit "投稿する", class: "btn btn-primary"
-    = link_to "戻る", articles_path, class: "btn btn-default"
+            li.c-disclist__item= msg
+    - if @categories.exists?
+      fieldset.c-form__fieldset
+        = f.label :category_id, "記事カテゴリ", class: "c-form__legend"
+        .c-form__select
+          = f.select :category_id, Category.all.map{ |c| [c.name, c.id]}, {:include_blank => "カテゴリなし"}
+    fieldset.c-form__fieldset
+      = f.label :title, "記事タイトル", class: "c-form__legend"
+      = f.text_field :title, class: "c-form__input"
+    fieldset.c-form__fieldset
+      = f.label :content, "ブログ本文", class: "c-form__legend"
+      = f.text_area :content, size: "40x10", class: "c-form__input"
+    ul.c-inlinelist
+      li.c-inlinelist__item
+        = f.submit "編集する", class: "c-btn--primary"
+      li.c-inlinelist__item
+        = link_to "戻る", article_path, class: "c-btn--default"

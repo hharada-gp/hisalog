@@ -1,0 +1,136 @@
+.c-{
+  &heading{
+    &--first{
+      @include pacifico;
+      font-size: 20px;
+    }
+    &--second{
+      @include pacifico;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+    &--third{
+      @include pacifico;
+      margin-bottom: 16px;
+    }
+  }
+  &link{
+    $defaultlink: #{&};
+    border-style: dashed;
+    border-width: 0 0 1px;
+    line-height: 1.5;
+    text-decoration: none;
+    &--default{
+      @extend #{$defaultlink};
+      color: colors(accent);
+      &:link{
+        color: colors(accent);
+      }
+      &:visited{
+        color: colors(semi-accent);
+      }
+    }
+  }
+  &btn{
+    $defaultbtn: #{&};
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 16px 0;
+    outline: none;
+    padding: 8px 16px;
+    text-decoration: none;
+    &--default{
+      @extend #{$defaultbtn};
+      background-color: colors(semi-base);
+      color: colors(text);
+      &:link{
+        color: colors(text);
+      }
+      &:visited{
+        color: colors(text);
+      }
+    }
+    &--primary{
+      @extend #{$defaultbtn};
+      background-color: colors(accent);
+      color: colors(base);
+      &:link{
+        color: colors(base);
+      }
+      &:visited{
+        color: colors(base);
+      }
+    }
+    &--add{
+      bottom: 0;
+      background-color: colors(accent);
+      border-radius: 20px;
+      color: colors(base);
+      display: inline-block;
+      margin: 16px 0;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+  }
+  &articles{
+    border-top: 2px solid colors(accent);
+    margin-bottom: 64px;
+    &__title{
+      font-size: 1.15em;
+      padding: 24px 150px 16px 0;
+      position: relative;
+    }
+    &__content{
+      height: 1em;
+      margin-bottom: 8px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    &__date{
+      font-size: .75rem;
+      position: absolute;
+      right: 0;
+      text-align: right;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &__detail{
+      text-align: right;
+    }
+  }
+  &widget{
+    border-top: 2px solid colors(accent);
+    margin-bottom: 64px;
+    padding-top: 24px;
+    &__text{
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+  }
+  &disclist{
+    margin-left: 1em;
+    &__item{
+      list-style-type: disc;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+  }
+  &inlinelist{
+    &--center{
+      text-align: center;
+    }
+    &__item{
+      display: inline-block;
+      margin: 0 8px;
+      &:first-child{
+        margin-left: 0;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+}

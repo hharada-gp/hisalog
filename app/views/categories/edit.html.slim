@@ -1,19 +1,20 @@
-main.container
-  header
-    h1
-      | カテゴリを編集する
+main.l-outer
+  header.l-header
+    h1.c-heading--first Edit the category
   = form_for :category, url: category_path, method: :patch do |f|
     - if @category.errors.any?
-      .bg-danger
+      .c-message--error
         p
           = @category.errors.count
           | 件のエラーのため保存できませんでした
-        ul
+        ul.c-disclist
           - @category.errors.full_messages.each do |msg|
-            li
-              = msg
-    .form-group
-      = f.label :name, "カテゴリ名"
-      = f.text_field :name, class: "form-control"
-    = f.submit "編集する", class: "btn btn-primary"
-    = link_to "戻る", categories_path, class: "btn btn-default"
+            li.c-disclist__item= msg
+    fieldset.c-form__fieldset
+      = f.label :name, "カテゴリ名", class: "c-form__legend"
+      = f.text_field :name, class: "c-form__input"
+    ul.c-inlinelist
+      li.c-inlinelist__item
+        = f.submit "編集する", class: "c-btn--primary"
+      li.c-inlinelist__item
+        = link_to "戻る", categories_path, class: "c-btn--default"

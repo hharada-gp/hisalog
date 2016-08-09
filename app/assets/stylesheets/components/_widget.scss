@@ -1,0 +1,12 @@
+.c-{
+  &widget{
+    border-top: 2px solid colors(accent);
+    margin-bottom: 64px;
+    padding-top: 24px;
+    &__text{
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+  }
+}

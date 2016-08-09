@@ -1,0 +1,29 @@
+.c-{
+    &articles{
+    border-top: 2px solid colors(accent);
+    margin-bottom: 64px;
+    &__title{
+      font-size: 1.15em;
+      padding: 24px 150px 16px 0;
+      position: relative;
+    }
+    &__content{
+      height: 1em;
+      margin-bottom: 8px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    &__date{
+      font-size: .75rem;
+      position: absolute;
+      right: 0;
+      text-align: right;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &__detail{
+      text-align: right;
+    }
+  }
+}

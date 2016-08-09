@@ -1,25 +1,23 @@
-main.container
-  header
-    h1
+main.l-outer
+  header.l-header
+    h1.c-heading--first
+      | Articles belong to  
       = @category.name
-      | の記事一覧
-  - @allArticlesInTheCategory.each do |article|
-    article
-      h2
-        = article.title
-      dl.dl-horizontal
-        dt
-          | 本文
-        dd
-          = article.content
-        dt
-          | 日付
-        dd
-          = date article.created_at
-        dt
-          | メニュー
-        dd
-          = link_to "詳細", article, class: "btn btn-default btn-xs"
-          = link_to "編集", edit_article_path(article), class: "btn btn-default btn-xs"
-          = link_to "削除", article_path(article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
-  = link_to 'カテゴリ一覧へ', categories_path, class: "btn btn-default"
+    ul.c-inlinelist
+      li.c-inlinelist__item
+        = link_to "このカテゴリを編集", edit_category_path(@category), class: "c-btn--default"
+      li.c-inlinelist__item
+        = link_to "このカテゴリを削除", category_path(@category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-btn--danger"
+  - if @allArticlesInTheCategory.exists?
+    - @allArticlesInTheCategory.each do |article|
+      article.c-articles
+        h2.c-articles__title
+          = article.title
+          span.c-articles__date= date article.created_at
+        p.c-articles__content= article.content
+        p.c-articles__detail
+          = link_to "続きを読む", article, class: "c-link--default"
+  - else
+    .l-block
+      p このカテゴリに属する記事はまだありません。
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"

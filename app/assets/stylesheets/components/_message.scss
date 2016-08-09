@@ -1,0 +1,12 @@
+.c-{
+  &message{
+    $defaultmessage: #{&};
+    border-radius: 4px;
+    margin-bottom: 40px;
+    padding: 16px;
+    &--error{
+      @extend #{$defaultmessage};
+      background-color: #fcc;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+.c-{
+  &link{
+    $defaultlink: #{&};
+    border-style: dashed;
+    border-width: 0 0 1px;
+    line-height: 1.5;
+    text-decoration: none;
+    &--default{
+      @extend #{$defaultlink};
+      color: colors(accent);
+      &:link{
+        color: colors(accent);
+      }
+      &:visited{
+        color: colors(semi-accent);
+      }
+    }
+    &--danger{
+      @extend #{$defaultlink};
+      color: colors(danger);
+      &:link{
+        color: colors(danger);
+      }
+      &:visited{
+        color: colors(semi-danger);
+      }
+    }
+  }
+  &btn{
+    $defaultbtn: #{&};
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    outline: none;
+    padding: 8px 16px;
+    text-decoration: none;
+    &--default{
+      @extend #{$defaultbtn};
+      background-color: colors(semi-base);
+      color: colors(text);
+      &:link{
+        color: colors(text);
+      }
+      &:visited{
+        color: colors(text);
+      }
+    }
+    &--primary{
+      @extend #{$defaultbtn};
+      background-color: colors(accent);
+      color: colors(base);
+      &:link{
+        color: colors(base);
+      }
+      &:visited{
+        color: colors(base);
+      }
+    }
+    &--danger{
+      @extend #{$defaultbtn};
+      background-color: colors(danger);
+      color: colors(base);
+      &:link{
+        color: colors(base);
+      }
+      &:visited{
+        color: colors(base);
+      }
+    }
+  }
+}

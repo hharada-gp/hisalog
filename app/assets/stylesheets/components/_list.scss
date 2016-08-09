@@ -1,0 +1,38 @@
+.c-{
+  &disclist{
+    margin-left: 1em;
+    &__item{
+      list-style-type: disc;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      &:first-child{
+        margin-top: 8px;
+      }
+    }
+  }
+  &inlinelist{
+    &--center{
+      text-align: center;
+    }
+    &__item{
+      display: inline-block;
+      margin: 0 8px;
+      &:first-child{
+        margin-left: 0;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+  &definitionlist{
+    margin-bottom: 40px;
+    &__header{
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    &__body{
+      margin-bottom: 8px;
+    }
+  }
+}

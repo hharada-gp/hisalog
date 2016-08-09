@@ -1,0 +1,18 @@
+.c-{
+  &heading{
+    &--first{
+      @include pacifico;
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+    &--second{
+      @include pacifico;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+    &--third{
+      @include pacifico;
+      margin-bottom: 16px;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+$siteWidth: 1024px;
+
+$colors: (
+  base: #fff,
+  semi-base: #cfcfcf,
+  accent: #689ad4,
+  semi-accent: #4373ab,
+  text: #353535,
+  danger: #d00,
+  semi-danger: #820e0e,
+);
+
+@function colors($key){
+  @return map-get($colors, $key);
+}
+
+@mixin pacifico{
+  font-family: 'Pacifico', cursive;
+}
+
+@mixin clearfix{
+  &::after{
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

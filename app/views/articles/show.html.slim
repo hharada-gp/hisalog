@@ -1,62 +1,63 @@
-article.container
-  header
-    h1
-      = @article.title
-  .row
-    .col-lg-8
+article.l-outer
+  header.l-header
+    h1.c-heading--first= @article.title
+  .l-row
+    .l-grid--8
       = @article.content
-    dl.col-lg-4
-      - if @article.category.present?
-        dt
-          | カテゴリ
-        dd
-          = link_to @article.category.name, @article.category
-      dt
-        | 日付
-      dd
-        = date @article.created_at
-      dt
-        | メニュー
-      dd
-        = link_to "編集", edit_article_path(@article), class: "btn btn-default btn-xs"
-        = link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
-  #comment.m-b-2
-    h2
-      | コメント
-    - if @allComments.exists?
-      ul
-        - @allComments.each do |comment|
-          li
-            dl
-              dt
-                = comment.name
-                |  さんのコメント
-              dd
-                = comment.content
-              dd
-                = link_to "編集", edit_comment_path(comment), class: "btn btn-default btn-xs"
-                = link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-xs"
-    - else
-      p
-        | まだコメントはありません。
-    = form_for @comment do |f|
-      - if @comment.errors.any?
-        .bg-danger
-          p
-            = @comment.errors.count
-            | 件のエラーのため保存できませんでした
-          ul
-            - @comment.errors.full_messages.each do |msg|
-              li
-                = msg
-      h3
-        | コメントを書く
-      .form-group
-        = f.label :name, "名前"
-        = f.text_field :name, class: "form-control"
-      .form-group
-        = f.label :content, "コメント"
-        = f.text_area :content, class: "form-control"
-      = f.submit "コメントを書く", class: "btn btn-primary"
-      = f.hidden_field :article_id
-  = link_to '記事一覧へ', articles_path, class: "btn btn-default"
+    .l-grid--4
+      aside.c-widget
+        h2.c-heading--second Category
+        - if @article.category.present?
+          p.c-widget__text
+            = link_to @article.category.name, @article.category, class: "c-link--default"
+        - else
+          p.c-widget__text カテゴリなし
+        h2.c-heading--second Date
+        p.c-widget__text= date @article.created_at
+        h2.c-heading--second Menu
+        p.c-widget__text
+          ul.c-inlinelist--center
+            li.c-inlinelist__item
+              = link_to "編集", edit_article_path(@article), class: "c-btn--default"
+            li.c-inlinelist__item
+              = link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "c-btn--danger"
+  #comment
+    aside.c-widget
+      h2.c-heading--second Comments
+      - if @comments.exists?
+        ul.c-disclist
+          - @comments.each do |comment|
+            li.c-disclist__item
+              dl.c-definitionlist
+                dt.c-definitionlist__header
+                  = comment.name
+                  |  さんのコメント
+                dd.c-definitionlist__body
+                  = comment.content
+                dd.c-definitionlist__body
+                  ul.c-inlinelist
+                    li.c-inlinelist__item
+                      = link_to "編集", edit_comment_path(comment), class: "c-link--default"
+                    li.c-inlinelist__item
+                      = link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "c-link--danger"
+      - else
+        p.c-widget__text コメントはまだありません。
+      = form_for @comment do |f|
+        - if @comment.errors.any?
+          .c-message--error
+            p
+              = @comment.errors.count
+              | 件のエラーのため保存できませんでした
+            ul.c-disclist
+              - @comment.errors.full_messages.each do |msg|
+                li.c-disclist__item= msg
+        h3.c-heading--third Add a comment
+        fieldset.c-form__fieldset
+          = f.label :name, "名前", class: "c-form__legend"
+          = f.text_field :name, class: "c-form__input"
+        fieldset.c-form__fieldset
+          = f.label :content, "コメント", class: "c-form__legend"
+          = f.text_area :content, size: "40x10", class: "c-form__input"
+        = f.submit "コメントを書く", class: "c-btn--primary"
+        = f.hidden_field :article_id
+  = link_to 'トップページへ', home_index_path, class: "c-btn--default"

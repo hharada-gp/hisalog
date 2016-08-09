@@ -1,19 +1,22 @@
-main.container
-  header
-    h1
-      | カテゴリを追加する
+main.l-outer
+  header.l-header
+    h1.c-heading--first Add a category
   = form_for @category do |f|
     - if @category.errors.any?
-      .bg-danger
+      .c-message--error
         p
           = @category.errors.count
           | 件のエラーのため保存できませんでした
-        ul
+        ul.c-disclist
           - @category.errors.full_messages.each do |msg|
-            li
-              = msg
-    .form-group
-      = f.label :name, "カテゴリ名"
-      = f.text_field :name, class: "form-control"
-    = f.submit "追加する", class: "btn btn-primary"
-    = link_to "カテゴリ一覧へ", categories_path, class: "btn btn-default"
+            li.c-disclist__item= msg
+    fieldset.c-form__fieldset
+      = f.label :name, "カテゴリ名", class: "c-form__legend"
+      = f.text_field :name, class: "c-form__input"
+    fieldset.c-form__fieldset
+      ul.c-inlinelist
+        li.c-inlinelist__item
+          = f.submit "追加する", class: "c-btn--primary"
+        li.c-inlinelist__item
+          = link_to "カテゴリ一覧へ", categories_path, class: "c-btn--default"
+    = link_to "トップページへ", home_index_path, class: "c-btn--default"

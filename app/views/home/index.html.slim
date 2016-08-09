@@ -1,6 +1,44 @@
-main.container
-  header
-    h1
-      | hisalog
-  = link_to '記事一覧はこちら', controller: "articles"
-  = link_to 'カテゴリ一覧はこちら', controller: "categories"
+.l-outer
+  header.l-header
+    h1.c-heading--first Hisalog
+    = link_to "記事を書く", new_article_path, class: "c-btn--primary"
+  main.l-row
+    .l-grid--8
+      - if @articles.exists?
+        - @articles.each do |article|
+          article.c-articles
+            h2.c-articles__title
+              = article.title
+              span.c-articles__date= date article.created_at
+            p.c-articles__content= article.content
+            p.c-articles__detail
+              = link_to '続きを読む', article, class: "c-link--default"
+        p.u-ta--center
+          = link_to "記事一覧", articles_path, class: "c-btn--default"
+      - else
+        p.u-ta--center 記事はまだありません。
+    .l-grid--4
+      aside.c-widget
+        h1.c-heading--second Categories
+        - if @categories.exists?
+          ul.c-disclist
+            - @categories.each do |category|
+              li.c-disclist__item
+                = category.name
+                = link_to "詳細", category, class: "c-link--default u-float--right"
+          p.c-widget__text
+            = link_to "カテゴリ一覧", categories_path, class: "c-btn--default"
+        - else
+          p.c-widget__text カテゴリはまだありません。
+          p.c-widget__text
+            = link_to "カテゴリを作成する", new_category_path, class: "c-btn--default"
+      aside.c-widget
+        h1.c-heading--second Comments
+        - if @comments.exists?
+          ul.c-disclist
+            - @comments.each do |comment|
+              li.c-disclist__item.clearfix
+                = comment.content
+                = link_to "詳細", comment.article, class: "c-link--default u-float--right"
+        - else
+          p コメントはまだありません。

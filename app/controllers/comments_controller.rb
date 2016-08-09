@@ -1,7 +1,11 @@
 class CommentsController < ApplicationController
+  def index
+    redirect_to home_index_path
+  end
+
   def new
     @comment = Comment.new
-    @allComments = @comment.article.comments.all
+    @comments = @comment.article.comments.all
   end
 
   def create
@@ -9,7 +13,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @comment.article
     else
-      @allComments = @comment.article.comments.all
+      @comments = @comment.article.comments.all
       render :new, status: :unprocessable_entity
     end
   end

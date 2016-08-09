@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.order('created_at DESC')
   end
 
   def new
@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    @categories = Category.all
     @article = Article.new(article_params)
     if @article.save
       redirect_to @article
@@ -20,11 +21,12 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @comment = @article.comments.build()
-    @allComments = @article.comments.all
+    @comments = @article.comments.all
   end
 
   def edit
     @article = Article.find(params[:id])
+    @categories = Category.all
   end
 
   def update
