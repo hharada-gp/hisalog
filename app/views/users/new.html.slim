@@ -1,0 +1,21 @@
+.l-outer
+  header.l-header
+    h1.c-heading--first Add a user
+  main.l-block
+    = form_for @user do |f|
+      - if @user.errors.any?
+        .c-message--error
+          p
+            = @user.errors.count
+            | 件のエラーのため保存できませんでした
+          ul.c-disclist
+            - @user.errors.full_messages.each do |msg|
+              li.c-disclist__item= msg
+      fieldset.c-form__fieldset
+        = f.label :name, "スクリーンネーム", class: "c-form__legend"
+        = f.text_field :name, class: "c-form__input"
+      fieldset.c-form__fieldset
+        = f.label :password_digest, "パスワード", class: "c-form__legend"
+        = f.password_field :password_digest, class: "c-form__input"
+      = f.submit "新規登録", class: "c-btn--primary"
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"

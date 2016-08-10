@@ -1,0 +1,13 @@
+.l-outer
+  header.l-header
+    h1.c-heading--first= @user.name
+  main.l-block
+    p.u-mb--16px
+      = @user.name
+      | というスクリーンネームのユーザが存在します。
+    ul.c-inlinelist
+      li.c-inlinelist__item
+        = link_to "編集", edit_user_path(@user), class: "c-btn--default"
+      li.c-inlinelist__item
+        = link_to "削除", user_path(@user), method: :delete, data: { confirm: "削除しますか？" }, class: "c-btn--danger" 
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"

@@ -1,0 +1,14 @@
+.l-outer
+  header.l-header
+    h1.c-heading--first Users
+    = link_to "新規登録", new_user_path, class: "c-btn--primary"
+  main.l-block
+    - if @users.exists?
+      - @users.each do |user|
+        article.c-articles
+          h2.c-articles__title= user.name
+          p.c-articles__detail
+            = link_to "詳細", user, class: "c-link--default"
+    - else
+      p ユーザがまだいません。
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"
