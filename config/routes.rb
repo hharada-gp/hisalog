@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'auth/login'
+
+  get 'auth/mypage'
+
+  get 'auth/logout'
+
   resources :articles
   resources :categories
   resources :comments

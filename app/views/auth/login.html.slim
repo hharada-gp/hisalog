@@ -1,0 +1,14 @@
+.l-outer
+  header.l-header
+    h1.c-heading--first Login
+  main.l-block
+    form
+      fieldset.c-form__fieldset
+        legend.c-form__legend ユーザ名
+        input.c-form__input
+      fieldset.c-form__fieldset
+        legend.c-form__legend パスワード
+        input.c-form__input type="password"
+      fieldset
+        button.c-btn--primary ログイン
+  = link_to "トップページへ", home_index_path, class: "c-btn--default"
