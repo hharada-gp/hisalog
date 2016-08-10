@@ -15,7 +15,10 @@
         = f.label :name, "スクリーンネーム", class: "c-form__legend"
         = f.text_field :name, class: "c-form__input"
       fieldset.c-form__fieldset
-        = f.label :password_digest, "パスワード", class: "c-form__legend"
-        = f.password_field :password_digest, class: "c-form__input"
+        = f.label :password, "パスワード", class: "c-form__legend"
+        = f.password_field :password, class: "c-form__input"
+      fieldset.c-form__fieldset
+        = f.label :password_confirmation, "パスワード確認", class: "c-form__legend"
+        = f.password_field :password_confirmation, class: "c-form__input"
       = f.submit "新規登録", class: "c-btn--primary"
   = link_to "トップページへ", home_index_path, class: "c-btn--default"
