@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
- def index
-  @articles = Article.order('created_at DESC')
-  @categories = Category.all
-  @comments = Comment.order('created_at DESC')
- end
+  before_action :check_login
+
+  def index
+    @articles = Article.limit(5).order('created_at DESC')
+    @categories = Category.limit(5)
+    @comments = Comment.limit(5).order('created_at DESC')
+    @users = User.limit(5)
+  end
 end

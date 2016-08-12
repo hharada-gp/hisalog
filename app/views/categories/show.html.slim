@@ -3,11 +3,14 @@ main.l-outer
     h1.c-heading--first
       | Articles belong to  
       = @category.name
-    ul.c-inlinelist
-      li.c-inlinelist__item
-        = link_to "このカテゴリを編集", edit_category_path(@category), class: "c-btn--default"
-      li.c-inlinelist__item
-        = link_to "このカテゴリを削除", category_path(@category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-btn--danger"
+    - if @current_user
+      ul.c-inlinelist
+        li.c-inlinelist__item
+          = link_to "このカテゴリを編集", edit_category_path(@category), class: "c-btn--default"
+        li.c-inlinelist__item
+          = link_to "このカテゴリを削除", category_path(@category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-btn--danger"
+    - else
+      = link_to "ログイン", auth_login_path, class: "c-btn--primary"
   - if @allArticlesInTheCategory.exists?
     - @allArticlesInTheCategory.each do |article|
       article.c-articles

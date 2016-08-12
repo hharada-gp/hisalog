@@ -1,7 +1,10 @@
 main.l-outer
   header.l-header
     h1.c-heading--first Categories
-    = link_to "カテゴリを追加する", new_category_path, class: "c-btn--primary"
+    - if @current_user
+      = link_to "カテゴリを追加する", new_category_path, class: "c-btn--primary"
+    - else
+      = link_to "ログイン", auth_login_path, class: "c-btn--primary"
   - if @categories.exists?
     .l-block
       ul.c-disclist
@@ -11,10 +14,11 @@ main.l-outer
             ul.c-inlinelist
               li.c-inlinelist__item
                 = link_to "このカテゴリの記事一覧", category, class: "c-link--default"
-              li.c-inlinelist__item
-                = link_to "編集", edit_category_path(category), class: "c-link--default"
-              li.c-inlinelist__item
-                = link_to "削除", category_path(category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-link--danger"
+              - if @current_user 
+                li.c-inlinelist__item
+                  = link_to "編集", edit_category_path(category), class: "c-link--default"
+                li.c-inlinelist__item
+                  = link_to "削除", category_path(category), method: :delete, data: { confirm: "削除しますか？（カテゴリを削除しても記事は削除されません。）" }, class: "c-link--danger"
   - else
     .l-block
       p カテゴリはまだありません。

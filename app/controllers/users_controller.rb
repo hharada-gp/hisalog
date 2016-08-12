@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
+  before_action :check_login
+
   def index
+    force_login
+
     @users = User.all
   end
 
@@ -21,10 +25,14 @@ class UsersController < ApplicationController
   end
 
   def edit
+    force_login
+
     @user = User.find(params[:id])
   end
 
   def update
+    force_login
+
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user
@@ -34,6 +42,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    force_login
+
     @user = User.find(params[:id])
     @user.destroy
 

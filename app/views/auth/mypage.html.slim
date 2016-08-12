@@ -2,6 +2,9 @@
   header.l-header
     h1.c-heading--first Mypage
   main.l-block
-    p ログイン成功しました。
+    p
+      = @current_user_name
+      | としてログイン中
+    = link_to "ログアウト", auth_logout_path, class: "c-btn--default"
   .l-block
     = link_to "トップページへ", home_index_path, class: "c-btn--default"

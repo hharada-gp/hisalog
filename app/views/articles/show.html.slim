@@ -16,11 +16,18 @@ article.l-outer
         p.c-widget__text= date @article.created_at
         h2.c-heading--second Menu
         p.c-widget__text
-          ul.c-inlinelist--center
-            li.c-inlinelist__item
-              = link_to "編集", edit_article_path(@article), class: "c-btn--default"
-            li.c-inlinelist__item
-              = link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "c-btn--danger"
+          - if @current_user
+            ul.c-inlinelist--center
+              li.c-inlinelist__item
+                = link_to "編集", edit_article_path(@article), class: "c-btn--default"
+              li.c-inlinelist__item
+                = link_to "削除", article_path(@article), method: :delete, data: { confirm: "削除しますか？" }, class: "c-btn--danger"
+          - else
+            | 記事を編集または削除するには
+            br
+            |ログインが必要です。
+            br
+            = link_to "ログイン", auth_login_path, class: "c-btn--primary"
   #comment
     aside.c-widget
       h2.c-heading--second Comments
@@ -34,12 +41,13 @@ article.l-outer
                   |  さんのコメント
                 dd.c-definitionlist__body
                   = comment.content
-                dd.c-definitionlist__body
-                  ul.c-inlinelist
-                    li.c-inlinelist__item
-                      = link_to "編集", edit_comment_path(comment), class: "c-link--default"
-                    li.c-inlinelist__item
-                      = link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "c-link--danger"
+                - if @current_user
+                  dd.c-definitionlist__body
+                    ul.c-inlinelist
+                      li.c-inlinelist__item
+                        = link_to "編集", edit_comment_path(comment), class: "c-link--default"
+                      li.c-inlinelist__item
+                        = link_to "削除", comment_path(comment), method: :delete, data: { confirm: "削除しますか？" }, class: "c-link--danger"
       - else
         p.c-widget__text コメントはまだありません。
       = form_for @comment do |f|

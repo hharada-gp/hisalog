@@ -14,8 +14,5 @@
       fieldset.c-form__fieldset
         = f.label :name, "スクリーンネーム", class: "c-form__legend"
         = f.text_field :name, class: "c-form__input"
-      fieldset.c-form__fieldset
-        = f.label :password_digest, "パスワード", class: "c-form__legend"
-        = f.password_field :password_digest, class: "c-form__input"
       = f.submit "編集", class: "c-btn--primary"
   = link_to "トップページへ", home_index_path, class: "c-btn--default"

@@ -1,7 +1,10 @@
 .l-outer
   header.l-header
     h1.c-heading--first Hisalog
-    = link_to "記事を書く", new_article_path, class: "c-btn--primary"
+    - if @current_user
+      = link_to "記事を書く", new_article_path, class: "c-btn--primary"
+    - else
+      = link_to "ログイン", auth_login_path, class: "c-btn--primary"
   main.l-row
     .l-grid--8
       - if @articles.exists?
@@ -18,6 +21,19 @@
       - else
         p.u-ta--center 記事はまだありません。
     .l-grid--4
+      - if @current_user
+        aside.c-widget
+          h1.c-heading--second Login
+          p.c-widget__text
+            | ようこそ
+            = @current_user.name
+            | さん
+          p.c-widget__text
+            = link_to "記事を書く", new_article_path, class: "c-btn--primary"
+          p.c-widget__text
+            = link_to "マイページ", auth_mypage_path, class: "c-btn--default"
+          p.c-widget__text
+            = link_to "ログアウト", auth_logout_path, class: "c-btn--danger"
       aside.c-widget
         h1.c-heading--second Categories
         - if @categories.exists?
@@ -42,3 +58,16 @@
                 = link_to "詳細", comment.article, class: "c-link--default u-float--right"
         - else
           p コメントはまだありません。
+      - if @current_user
+        aside.c-widget
+          h1.c-heading--second Users
+          - if @users.exists?
+            ul.c-disclist
+              - @users.each do |user|
+                li.c-disclist__item.clearfix
+                  = user.name
+                  = link_to "詳細", user, class: "c-link--default u-float--right"
+            p.c-widget__text
+              = link_to "ユーザ一覧", users_path, class: "c-btn--default"
+          - else
+            p ユーザはまだいません。

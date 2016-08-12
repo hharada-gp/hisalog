@@ -2,13 +2,20 @@
   header.l-header
     h1.c-heading--first Login
   main.l-block
-    form
+    = form_tag "/auth/index", method: :post do |f|
+      - if flash[:error]
+        .c-message--error
+          p ユーザ名またはパスワードが違います
       fieldset.c-form__fieldset
-        legend.c-form__legend スクリーンネーム
-        input.c-form__input
+        = label :user, :name, "スクリーンネーム", class: "c-form__legend"
+        = text_field :user, :name, class: "c-form__input"
       fieldset.c-form__fieldset
-        legend.c-form__legend パスワード
-        input.c-form__input type="password"
-      fieldset
+        = label :user, :password, "パスワード", class: "c-form__legend"
+        = password_field :user, :password, class: "c-form__input"
+      fieldset.c-form__fieldset
         button.c-btn--primary ログイン
+      fieldset
+        p
+          | 登録がまだの方は
+          = link_to "新規登録", new_user_path, class: "c-link--default"
   = link_to "トップページへ", home_index_path, class: "c-btn--default"

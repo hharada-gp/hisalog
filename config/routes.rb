@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  get 'auth/index'
   get 'auth/login'
-
   get 'auth/mypage'
-
   get 'auth/logout'
+  post 'auth/index', to: 'auth#create'
 
   resources :articles
   resources :categories

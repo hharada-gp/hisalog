@@ -1,14 +1,20 @@
 class ArticlesController < ApplicationController
+  before_action :check_login
+
   def index
-    @articles = Article.order('created_at DESC')
+    @articles = Article.page(1).per(5)
   end
 
   def new
+    force_login
+
     @article = Article.new
     @categories = Category.all
   end
 
   def create
+    force_login
+
     @categories = Category.all
     @article = Article.new(article_params)
     if @article.save
@@ -25,11 +31,15 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    force_login
+
     @article = Article.find(params[:id])
     @categories = Category.all
   end
 
   def update
+    force_login
+
     @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to @article
@@ -39,6 +49,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    force_login
+
     @article = Article.find(params[:id])
     @article.destroy
 

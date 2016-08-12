@@ -1,13 +1,19 @@
 class CategoriesController < ApplicationController
+  before_action :check_login
+
   def index
     @categories = Category.all
   end
 
   def new
+    force_login
+
     @category = Category.new
   end
 
   def create
+    force_login
+
     @category = Category.new(category_params)
     if @category.save
       redirect_to categories_path
@@ -22,10 +28,14 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    force_login
+
     @category = Category.find(params[:id])
   end
 
   def update
+    force_login
+
     @category = Category.find(params[:id])
     if @category.update(category_params)
       redirect_to categories_path
@@ -35,6 +45,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    force_login
+
     @category = Category.find(params[:id])
     @category.destroy
 

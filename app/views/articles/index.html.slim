@@ -1,7 +1,19 @@
 main.l-outer
   header.l-header
     h1.c-heading--first List of articles
-    = link_to "新しい記事を作成する", new_article_path, class: "c-btn--primary"
+    - if @current_user
+      p
+        = @current_user.name
+        | さんとしてログイン中です。
+      ul.c-inlinelist
+        li.c-inlinelist__item
+          = link_to "記事を書く", new_article_path, class: "c-btn--primary"
+        li.c-inlinelist__item
+          = link_to "マイページ", auth_mypage_path, class: "c-btn--default"
+        li.c-inlinelist__item
+          = link_to "ログアウト", auth_logout_path, class: "c-btn--danger"
+    - else
+      = link_to "ログイン", auth_login_path, class: "c-btn--primary"
   - if @articles.exists?
     - @articles.each do |article|
       article.c-articles
@@ -11,6 +23,7 @@ main.l-outer
         p.c-articles__content= article.content
         p.c-articles__detail
           = link_to "続きを読む", article, class: "c-link--default"
+    = paginate @articles
   - else
     .l-block
       p 記事はまだありません。

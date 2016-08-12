@@ -19,10 +19,14 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    force_login
+
     @comment = Comment.find(params[:id])
   end
 
   def update
+    force_login
+
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
       redirect_to @comment.article
@@ -32,6 +36,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    force_login
+
     @comment = Comment.find(params[:id])
     @comment.destroy
 
