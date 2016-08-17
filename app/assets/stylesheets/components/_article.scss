@@ -26,4 +26,11 @@
       text-align: right;
     }
   }
+  &article{
+    margin-bottom: 40px;
+    &__text{
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+  }
 }

@@ -2,8 +2,8 @@ article.l-outer
   header.l-header
     h1.c-heading--first= @article.title
   .l-row
-    .l-grid--8
-      = @article.content
+    .l-grid--8.c-article
+      = simple_format @article.content, class: "c-article__text"
     .l-grid--4
       aside.c-widget
         h2.c-heading--second Category
