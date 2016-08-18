@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :check_login
+  before_action :default_blog_setting
 
   def index
     @categories = Category.all

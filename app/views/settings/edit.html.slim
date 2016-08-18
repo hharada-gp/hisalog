@@ -1,0 +1,25 @@
+main.l-outer
+  header.l-header
+    h1.c-heading--first Edit blog settings
+  = form_for :setting, url: settings_path, method: :patch do |f|
+    - if @setting.errors.any?
+      .c-message--error
+        p
+          = @setting.errors.count
+          | 件のエラーのため保存できませんでした
+        ul.c-disclist
+          - @setting.errors.full_messages.each do |msg|
+            li.c-disclist__item= msg
+    fieldset.c-form__fieldset
+      = f.label :title, "ブログタイトル", class: "c-form__legend"
+      = f.text_field :title, class: "c-form__input"
+    fieldset.c-form__fieldset
+      = f.label :description, "ブログ説明文", class: "c-form__legend"
+      = f.text_field :description, class: "c-form__input"
+    ul.c-inlinelist.u-mb--24px
+      li.c-inlinelist__item
+        = f.submit "設定", class: "c-btn--primary"
+      li.c-inlinelist__item
+        = link_to "マイページに戻る", settings_path, class: "c-btn--default"
+    p
+      = link_to "トップページへ", home_index_path, class: "c-btn--default"

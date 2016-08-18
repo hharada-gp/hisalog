@@ -2,9 +2,14 @@
   header.l-header
     h1.c-heading--first Mypage
   main.l-block
-    p
+    p.c-article__text
       = @current_user_name
       | としてログイン中
-    = link_to "ログアウト", auth_logout_path, class: "c-btn--default"
+    ul.c-inlinelist
+      li.c-inlinelist__item
+        = link_to "ブログ設定", "/settings/edit", class: "c-btn--primary"
+      li.c-inlinelist__item
+        = link_to "ログアウト", auth_logout_path, class: "c-btn--default"
+      li.c-inlinelist__item
   .l-block
     = link_to "トップページへ", home_index_path, class: "c-btn--default"

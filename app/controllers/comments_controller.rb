@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :default_blog_setting
+
   def index
     redirect_to home_index_path
   end

@@ -2,7 +2,7 @@ main.l-outer
   header.l-header
     h1.c-heading--first List of articles
     - if @current_user
-      p
+      p.c-heading__description
         = @current_user.name
         | さんとしてログイン中です。
       ul.c-inlinelist

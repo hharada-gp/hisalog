@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :check_login
+  before_action :default_blog_setting
 
   def index
     @articles = Article.limit(5).order('created_at DESC')

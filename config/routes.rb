@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get 'auth/logout'
   post 'auth/index', to: 'auth#create'
 
+  get 'settings', to: "settings#index"
+  get 'settings/edit'
+  patch 'settings', to: "settings#update"
+
   resources :articles
   resources :categories
   resources :comments

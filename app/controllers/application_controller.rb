@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
   end
+
+  def default_blog_setting
+    @setting = Setting.find_or_create_by(id: 1)
+  end
 end

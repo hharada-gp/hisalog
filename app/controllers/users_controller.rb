@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_login
+  before_action :default_blog_setting
 
   def index
     force_login
@@ -14,7 +15,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user
+      session[:user_id] = @user.id
+      redirect_to auth_mypage_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,9 +47,14 @@ class UsersController < ApplicationController
     force_login
 
     @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to users_path
+    if @current_user == @user
+      reset_user_session
+      @user.destroy
+      redirect_to root_path
+    else
+      @user.destroy
+      redirect_to users_path
+    end
   end
 
   private

@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+  before_action :default_blog_setting
+
   def index
     redirect_to auth_login_path
   end

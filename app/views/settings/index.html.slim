@@ -1,0 +1,16 @@
+main.l-outer
+  header.l-header
+    h1.c-heading--first Blog settings
+  main.l-block
+    dl.c-definitionlist
+      dt.c-definitionlist__header ブログタイトル
+      dd.c-definitionlist__body
+        = @setting.title
+      dt.c-definitionlist__header ブログ説明文
+      dd.c-definitionlist__body
+        - if @setting.description.present?
+          = @setting.description
+        - else
+          | なし
+    p
+      = link_to "トップページへ", home_index_path, class: "c-btn--default"

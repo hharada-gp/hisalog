@@ -1,6 +1,10 @@
 .l-outer
   header.l-header
-    h1.c-heading--first Hisalog
+    h1.c-heading--first
+      = @setting.title
+    - if @setting.description
+      p.c-heading__description
+        = @setting.description
     - if @current_user
       = link_to "記事を書く", new_article_path, class: "c-btn--primary"
     - else
